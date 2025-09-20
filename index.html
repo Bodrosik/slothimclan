@@ -1,447 +1,271 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SLOTHIM — Офіс клану</title>
-  <meta name="description" content="Офіційна сторінка клану SLOTHIM — новини, склад, система підвищення, анкета вступу">
+  <meta charset="UTF-8">
+  <title>SLOTHIM Clan</title>
   <style>
-    :root{
-      --bg:#f7f9fc; --card:#ffffff; --muted:#6b7280; --accent:#2b6cb0; --accent-2:#7c3aed; --success:#16a34a; --danger:#e11d48; --glass: rgba(255,255,255,0.6);
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle at top, #0a0a0f, #000000 90%);
+      color: #e0e0ff;
+      text-align: center;
     }
-    [data-theme="dark"]{ --bg:#0b1020; --card:#0f1724; --muted:#94a3b8; --accent:#4fd1c5; --accent-2:#60a5fa; --glass: rgba(255,255,255,0.03); }
 
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:linear-gradient(180deg,var(--bg),#eef4fb);}
-    header{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;background:var(--card);backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(12,18,28,0.08);position:sticky;top:0;z-index:50}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:22px}
-    nav{display:flex;gap:10px;align-items:center}
-    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600}
-    nav a:hover{background:var(--glass);color:var(--accent-2)}
-    .controls{display:flex;gap:10px;align-items:center}
-    .btn{padding:8px 12px;border-radius:8px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:700;cursor:pointer}
-    .ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--muted)}
+    header {
+      padding: 30px;
+      background: linear-gradient(90deg, #0ff, #f0f, #0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 42px;
+      font-weight: bold;
+      text-shadow: 0 0 15px #0ff, 0 0 25px #f0f;
+    }
 
-    main{max-width:1200px;margin:28px auto;padding:0 18px}
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+    section {
+      padding: 60px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-    /* Left column */
-    .panel{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 6px 18px rgba(12,18,28,0.04)}
-    .hero{display:flex;gap:18px;align-items:center}
-    .hero .info{flex:1}
-    h1{margin:0;font-size:28px}
-    p.lead{margin:6px 0 0;color:var(--muted)}
+    h2 {
+      font-size: 32px;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff;
+      margin-bottom: 30px;
+    }
 
-    .news-item{border-radius:10px;padding:12px;margin-bottom:12px;border-left:4px solid var(--accent-2);background:linear-gradient(180deg,transparent,rgba(0,0,0,0.01))}
-    .meta{font-size:12px;color:var(--muted)}
-    .avatar{width:44px;height:44px;border-radius:10px;display:inline-block;background:linear-gradient(135deg,#fff,rgba(255,255,255,0.06));align-items:center;justify-content:center;display:flex}
+    .about {
+      max-width: 800px;
+      margin: auto;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #bbb;
+    }
 
-    /* Members list */
-    .members{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
-    .member{background:var(--glass);padding:10px;border-radius:10px;text-align:center}
-    .member .name{font-weight:700}
-    .role{font-size:12px;color:var(--muted)}
+    .team {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
 
-    /* Right column */
-    .side-section{position:sticky;top:82px}
-    .card-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-    .small{font-size:13px;color:var(--muted)}
+    .member {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #0ff;
+      border-radius: 15px;
+      width: 200px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-    /* Application form */
-    form.app{display:grid;gap:10px}
-    input[type=text],input[type=email],select,textarea{padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);outline:none;background:transparent}
-    textarea{min-height:110px}
+    .member:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #0ff;
+    }
 
-    /* Admin panel modal */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(3,6,18,0.5);z-index:200}
-    .modal.open{display:flex}
-    .modal .box{width:860px;max-width:95%;background:var(--card);padding:18px;border-radius:12px}
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:8px;border-bottom:1px solid rgba(0,0,0,0.04);text-align:left}
+    .member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #0ff;
+      margin-bottom: 10px;
+    }
 
-    /* badges */
-    .badge{display:inline-block;padding:6px 8px;border-radius:8px;font-size:12px;font-weight:700}
-    .badge.leader{background:linear-gradient(90deg,#fb7185,#f97316);color:#111}
-    .badge.officer{background:linear-gradient(90deg,#60a5fa,#7c3aed);color:white}
-    .badge.member{background:linear-gradient(90deg,#c7f9cc,#a7f3d0);color:#08211b}
+    .rank-system {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
 
-    footer{margin:28px 0;text-align:center;color:var(--muted)}
+    .rank {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #f0f;
+      border-radius: 12px;
+      width: 180px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s;
+    }
 
-    /* responsive */
-    @media (max-width:980px){.grid{grid-template-columns:1fr} .members{grid-template-columns:repeat(2,1fr)} .side-section{position:relative;top:auto}}
+    .rank:hover {
+      box-shadow: 0 0 20px #f0f;
+      transform: translateY(-5px);
+    }
 
-    /* small helpers */
-    .muted{color:var(--muted)}
-    .row{display:flex;gap:10px;align-items:center}
-    .spacer{flex:1}
-    .pill{padding:6px 10px;border-radius:999px;border:1px solid rgba(0,0,0,0.04)}
+    button {
+      background: none;
+      border: 2px solid #0ff;
+      color: #0ff;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    button:hover {
+      background: #0ff;
+      color: #000;
+      box-shadow: 0 0 15px #0ff;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background: #111;
+      margin: 10% auto;
+      padding: 20px;
+      border: 2px solid #0ff;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 12px;
+      text-align: left;
+      color: #eee;
+      box-shadow: 0 0 20px #0ff;
+      position: relative;
+    }
+
+    .close {
+      color: #0ff;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #0ff;
+      border-radius: 8px;
+      background: #000;
+      color: #0ff;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    form input:focus, form textarea:focus {
+      outline: none;
+      box-shadow: 0 0 10px #0ff;
+    }
+
+    footer {
+      padding: 20px;
+      font-size: 14px;
+      color: #666;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="brand">
-      <div class="logo">S</div>
-      <div>
-        <div style="font-weight:800">SLOTHIM</div>
-        <div class="small muted">Офіс клану — внутрішній портал</div>
+  <header>SLOTHIM CLAN</header>
+
+  <section>
+    <h2>Про нас</h2>
+    <p class="about">Ми — клан SLOTHIM. Наша мета — бути найсильнішими у всіх іграх, куди ми приходимо. Ми цінуємо дружбу, підтримку та спільні перемоги. Кожен новий учасник стає частиною великої сім’ї!</p>
+  </section>
+
+  <section>
+    <h2>Старший склад</h2>
+    <div class="team">
+      <div class="member">
+        <img src="https://i.imgur.com/0y0y0y0.png" alt="Leader">
+        <h3>Leader</h3>
+        <p>Глава клану</p>
+      </div>
+      <div class="member">
+        <img src="https://i.imgur.com/0y0y0y0.png" alt="Officer">
+        <h3>Officer</h3>
+        <p>Офіцер</p>
+      </div>
+      <div class="member">
+        <img src="https://i.imgur.com/0y0y0y0.png" alt="Strategist">
+        <h3>Strategist</h3>
+        <p>Тактик</p>
       </div>
     </div>
-    <nav>
-      <a href="#news">Новини</a>
-      <a href="#staff">Старший склад</a>
-      <a href="#promotion">Підвищення</a>
-      <a href="#about">Про нас</a>
-      <a href="#apply">Анкета</a>
-    </nav>
-    <div class="controls">
-      <button class="ghost" id="themeToggle">Тема</button>
-      <button class="btn" id="openAdmin">Панель (старший склад)</button>
+  </section>
+
+  <section>
+    <h2>Система підвищення</h2>
+    <div class="rank-system">
+      <div class="rank">
+        <h3>Новачок</h3>
+        <p>Перший рівень</p>
+      </div>
+      <div class="rank">
+        <h3>Боєць</h3>
+        <p>Активний гравець</p>
+      </div>
+      <div class="rank">
+        <h3>Офіцер</h3>
+        <p>Помічник лідера</p>
+      </div>
+      <div class="rank">
+        <h3>Старший</h3>
+        <p>Ядро клану</p>
+      </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section class="grid">
-      <div>
-        <section class="panel hero" id="news">
-          <div style="min-width:80px">
-            <div class="avatar">SI</div>
-          </div>
-          <div class="info">
-            <h1>Ласкаво просимо, SLOTHIM офіс</h1>
-            <p class="lead">Тут — офіційні новини, склад, процес підвищення та заявка на вступ. Працює через локальне сховище; старший склад може керувати через панель.</p>
-            <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
-              <div class="pill">Активні: <strong id="activeCount">0</strong></div>
-              <div class="pill">Заявки: <strong id="appCount">0</strong></div>
-            </div>
-          </div>
-        </section>
+  <section>
+    <h2>Анкета на вступ</h2>
+    <button id="openModal">Заповнити анкету</button>
+  </section>
 
-        <section class="panel" style="margin-top:16px">
-          <h3 class="card-title">Останні новини <span class="small muted">(вручну або через панель)</span></h3>
-          <div id="newsList">
-            <!-- news items injected here -->
-          </div>
-          <div style="margin-top:8px;text-align:center">
-            <button class="ghost" id="loadSample">Завантажити приклади</button>
-          </div>
-        </section>
-
-        <section class="panel" id="staff" style="margin-top:16px">
-          <div class="card-title">
-            <h3>Старший склад</h3>
-            <div class="small muted">Керує кланом</div>
-          </div>
-          <div class="row" style="flex-wrap:wrap">
-            <div style="flex:1">
-              <div style="font-weight:800">Керівництво</div>
-              <div class="members" id="leadersList">
-                <!-- leaders -->
-              </div>
-            </div>
-            <div style="width:220px">
-              <div style="font-weight:800">Офіцери</div>
-              <div id="officersList" style="margin-top:8px">
-                <!-- officers -->
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="panel" id="promotion" style="margin-top:16px">
-          <div class="card-title">
-            <h3>Система підвищення</h3>
-            <div class="small muted">Процес, критерії, запити</div>
-          </div>
-          <ol>
-            <li><strong>Кандидат:</strong> подає заявку на підвищення через профіль або старший склад ініціює.</li>
-            <li><strong>Оцінка:</strong> старший склад оцінює активність, дисципліну та внесок.</li>
-            <li><strong>Голосування:</strong> мінімум 2 голоси з керівництва потрібні для підвищення.</li>
-            <li><strong>Результат:</strong> роль оновлюється в системі та відправляється повідомлення.</li>
-          </ol>
-          <div style="margin-top:10px">
-            <label class="small muted">Запит на підвищення (введіть нік):</label>
-            <div style="display:flex;gap:8px;margin-top:6px">
-              <input type="text" id="promoteNick" placeholder="Нік гравця">
-              <button class="btn" id="requestPromote">Подати запит</button>
-            </div>
-            <div id="promoteResult" class="small muted" style="margin-top:6px"></div>
-          </div>
-        </section>
-
-        <section class="panel" id="about" style="margin-top:16px">
-          <h3>Про нас</h3>
-          <p class="muted">SLOTHIM — дружній клан, що поєднує офісну дисципліну та ігрову свободу. Ми проводимо регулярні події, тренінги та відкриті набори. Наша мета — рости якісно та підтримувати новачків.</p>
-
-          <h4 style="margin-top:12px">Наші правила (коротко)</h4>
-          <ul>
-            <li>Повага до інших членів;</li>
-            <li>Активність на тиждень — мінімум 3 дні (або повідомити про відсутність);</li>
-            <li>Виконувати накази старшого складу в межах правил клану;</li>
-            <li>Ніякої токсичної поведінки у загальних чатах.</li>
-          </ul>
-        </section>
-
-      </div>
-
-      <aside>
-        <div class="side-section">
-          <div class="panel">
-            <div class="card-title">
-              <h4>Швидка статистика</h4>
-              <div class="small muted">Локально збережено</div>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <div class="row"><div>Членів:</div><div class="spacer"></div><div id="memberCount">0</div></div>
-              <div class="row"><div>Активні сьогодні:</div><div class="spacer"></div><div id="todayActive">0</div></div>
-              <div class="row"><div>Остання зміна:</div><div class="spacer"></div><div id="lastUpdate">—</div></div>
-            </div>
-          </div>
-
-          <div class="panel" style="margin-top:12px">
-            <div class="card-title"><h4>Анкета на вступ</h4><div class="small muted">Подати заявку</div></div>
-            <form class="app" id="applyForm">
-              <input type="text" id="appNick" placeholder="Ігровий нік" required>
-              <input type="email" id="appEmail" placeholder="Email (контакт)" required>
-              <select id="appRole">
-                <option value="member">Звичайний член</option>
-                <option value="trial">Стажер</option>
-              </select>
-              <textarea id="appWhy" placeholder="Чому хочеш у клан? (коротко)" required></textarea>
-              <div style="display:flex;gap:8px">
-                <button class="btn" type="submit">Надіслати заявку</button>
-                <button class="ghost" type="button" id="clearApps">Очистити заявки (адмін)</button>
-              </div>
-            </form>
-            <div style="margin-top:10px"><small class="muted">Всі заявки зберігаються в браузері. Старший склад може переглядати їх у панелі.</small></div>
-          </div>
-
-          <div class="panel" style="margin-top:12px">
-            <div class="card-title"><h4>Контакти</h4><div class="small muted">Звертайтесь до керівництва</div></div>
-            <div class="small muted">Головний: SlothLeader#0001<br>Пошта: slothim@example.com</div>
-            <div style="margin-top:10px">
-              <button class="btn" id="exportData">Експорт даних</button>
-            </div>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <footer>
-      © SLOTHIM — Внутрішній портал. Зберігає дані у вашому браузері. Якщо потрібно синхронізувати — можна підключити сервер API.
-    </footer>
-  </main>
-
-  <!-- Admin modal -->
-  <div class="modal" id="adminModal" aria-hidden="true">
-    <div class="box">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <h3>Панель старшого складу</h3>
-        <div class="row"><button class="ghost" id="closeAdmin">Закрити</button></div>
-      </div>
-      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div>
-          <h4>Керування новинами</h4>
-          <div style="display:flex;gap:8px;margin-bottom:8px"><input id="newsTitle" placeholder="Заголовок"><button class="btn" id="addNews">Додати</button></div>
-          <textarea id="newsContent" placeholder="Текст новини"></textarea>
-          <div style="margin-top:8px"><small class="muted">Новини будуть збережені у localStorage.</small></div>
-        </div>
-        <div>
-          <h4>Управління членами</h4>
-          <table>
-            <thead><tr><th>Нік</th><th>Роль</th><th>Дії</th></tr></thead>
-            <tbody id="membersTable"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <hr style="margin:12px 0">
-      <h4>Заявки</h4>
-      <table>
-        <thead><tr><th>Нік</th><th>Email</th><th>Роль</th><th>Чому</th><th>Дії</th></tr></thead>
-        <tbody id="appsTable"></tbody>
-      </table>
-      <div style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px">
-        <button class="ghost" id="closeAdmin2">Закрити</button>
-      </div>
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Анкета</h2>
+      <form>
+        <input type="text" placeholder="Ваш нікнейм" required>
+        <input type="number" placeholder="Вік" required>
+        <textarea placeholder="Чому хочете вступити?" required></textarea>
+        <button type="submit">Надіслати</button>
+      </form>
     </div>
   </div>
 
+  <footer>
+    © 2025 SLOTHIM Clan. Всі права захищено.
+  </footer>
+
   <script>
-    // Простий локальний менеджер даних (localStorage). Ця система підходить для демо/оффлайн внутрішнього порталу.
-    const DB_KEY = 'slothim_portal_v1';
-    const defaultData = {
-      members: [
-        {nick:'SlothLeader',role:'leader',joined: '2024-11-01'},
-        {nick:'Moss',role:'officer',joined: '2025-02-10'},
-        {nick:'Lazy',role:'member',joined: '2025-03-05'},
-      ],
-      news: [],
-      apps: [] ,
-      lastUpdate: new Date().toISOString()
-    };
+    const modal = document.getElementById("myModal");
+    const btn = document.getElementById("openModal");
+    const span = document.getElementsByClassName("close")[0];
 
-    function readDB(){
-      try{const raw = localStorage.getItem(DB_KEY); if(!raw) return structuredClone(defaultData); return JSON.parse(raw);}catch(e){console.error(e); return structuredClone(defaultData)}
-    }
-    function writeDB(data){ localStorage.setItem(DB_KEY, JSON.stringify(data)); updateUI(); }
-
-    // init
-    let DB = readDB();
-
-    // UI helpers
-    function el(tag,attrs={},txt=''){const e=document.createElement(tag);for(const k in attrs) e.setAttribute(k,attrs[k]); if(txt) e.textContent=txt; return e}
-
-    // render news
-    function renderNews(){
-      const list = document.getElementById('newsList'); list.innerHTML='';
-      if(!DB.news.length){ list.innerHTML='<div class="muted">Новин ще не додано. Натисніть "Завантажити приклади" або додайте в панелі.</div>'; return }
-      DB.news.slice().reverse().forEach(n=>{
-        const node = document.createElement('div'); node.className='news-item';
-        node.innerHTML = `<div style=\"display:flex;justify-content:space-between\"><div><strong>${escapeHTML(n.title)}</strong></div><div class=\"meta\">${new Date(n.date).toLocaleString()}</div></div><div style=\"margin-top:8px\">${escapeHTML(n.content)}</div>`;
-        list.appendChild(node);
-      })
+    btn.onclick = function() {
+      modal.style.display = "block";
     }
 
-    function escapeHTML(s){ if(!s) return ''; return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('\"','&quot;') }
-
-    // render members
-    function renderMembers(){
-      document.getElementById('membersTable').innerHTML='';
-      const leadersEl = document.getElementById('leadersList'); leadersEl.innerHTML='';
-      const officersEl = document.getElementById('officersList'); officersEl.innerHTML='';
-
-      DB.members.forEach(m=>{
-        const tr = document.createElement('tr');
-        const td1=document.createElement('td'); td1.textContent = m.nick; const td2=document.createElement('td'); td2.textContent = m.role; const td3=document.createElement('td');
-        const btnProm = document.createElement('button'); btnProm.className='ghost'; btnProm.textContent='Підвищити'; btnProm.onclick=()=>promoteMember(m.nick);
-        const btnDel = document.createElement('button'); btnDel.className='ghost'; btnDel.textContent='Видалити'; btnDel.onclick=()=>deleteMember(m.nick);
-        td3.appendChild(btnProm); td3.appendChild(document.createTextNode(' ')); td3.appendChild(btnDel);
-        tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3);
-        document.getElementById('membersTable').appendChild(tr);
-
-        // side lists
-        const card = document.createElement('div'); card.className='member';
-        const name = document.createElement('div'); name.className='name'; name.textContent=m.nick;
-        const role = document.createElement('div'); role.className='role'; role.textContent=m.role;
-        card.appendChild(name); card.appendChild(role);
-
-        if(m.role==='leader') leadersEl.appendChild(card);
-        else if(m.role==='officer') officersEl.appendChild(card);
-      });
-
-      document.getElementById('memberCount').textContent = DB.members.length;
+    span.onclick = function() {
+      modal.style.display = "none";
     }
 
-    // render apps
-    function renderApps(){
-      const t = document.getElementById('appsTable'); t.innerHTML='';
-      DB.apps.forEach((a,idx)=>{
-        const tr=document.createElement('tr');
-        tr.innerHTML = `<td>${escapeHTML(a.nick)}</td><td>${escapeHTML(a.email)}</td><td>${escapeHTML(a.role)}</td><td>${escapeHTML(a.why)}</td>`;
-        const td = document.createElement('td');
-        const acc = document.createElement('button'); acc.className='btn'; acc.textContent='Прийняти'; acc.onclick=()=>acceptApp(idx);
-        const rej = document.createElement('button'); rej.className='ghost'; rej.textContent='Відхилити'; rej.onclick=()=>rejectApp(idx);
-        td.appendChild(acc); td.appendChild(document.createTextNode(' ')); td.appendChild(rej);
-        tr.appendChild(td);
-        t.appendChild(tr);
-      });
-      document.getElementById('appCount').textContent = DB.apps.length;
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
     }
-
-    function updateUI(){
-      renderNews(); renderMembers(); renderApps();
-      document.getElementById('activeCount').textContent = DB.members.filter(m=>m.role!=='trial').length;
-      document.getElementById('todayActive').textContent = Math.max(0, Math.floor(DB.members.length/2));
-      document.getElementById('lastUpdate').textContent = new Date(DB.lastUpdate).toLocaleString();
-      document.getElementById('appCount').textContent = DB.apps.length;
-    }
-
-    // actions
-    function addNews(title,content){ DB.news.push({title,content,date:new Date().toISOString()}); DB.lastUpdate = new Date().toISOString(); writeDB(DB); }
-    function promoteMember(nick){
-      const i = DB.members.findIndex(m=>m.nick===nick);
-      if(i===-1) return alert('Не знайдено');
-      const order = ['member','trial','officer','leader'];
-      const cur = DB.members[i].role; const idx = order.indexOf(cur); const next = order[Math.min(order.length-1,idx+1)];
-      DB.members[i].role = next; DB.lastUpdate=new Date().toISOString(); writeDB(DB);
-      alert(`${nick} -> ${next}`);
-    }
-    function deleteMember(nick){ if(!confirm('Видалити '+nick+'?')) return; DB.members = DB.members.filter(m=>m.nick!==nick); DB.lastUpdate=new Date().toISOString(); writeDB(DB); }
-
-    function acceptApp(idx){ const a = DB.apps[idx]; DB.members.push({nick:a.nick,role:a.role,joined:new Date().toISOString()}); DB.apps.splice(idx,1); DB.lastUpdate=new Date().toISOString(); writeDB(DB); }
-    function rejectApp(idx){ if(!confirm('Відхилити заявку?')) return; DB.apps.splice(idx,1); DB.lastUpdate=new Date().toISOString(); writeDB(DB); }
-
-    // application submit
-    document.getElementById('applyForm').addEventListener('submit', e=>{
-      e.preventDefault(); const nick=document.getElementById('appNick').value.trim(); const email=document.getElementById('appEmail').value.trim(); const role=document.getElementById('appRole').value; const why=document.getElementById('appWhy').value.trim();
-      if(!nick||!email||!why) return alert('Заповніть усі поля');
-      DB.apps.push({nick,email,role,why,date:new Date().toISOString()}); DB.lastUpdate=new Date().toISOString(); writeDB(DB);
-      alert('Заявку відправлено — старший склад побачить її у панелі.');
-      document.getElementById('applyForm').reset();
-    });
-
-    document.getElementById('clearApps').addEventListener('click', ()=>{
-      if(!confirm('Очистити всі заявки? (тільки в локальному сховищі)')) return; DB.apps=[]; DB.lastUpdate=new Date().toISOString(); writeDB(DB);
-    })
-
-    // admin panel open
-    document.getElementById('openAdmin').addEventListener('click', ()=>{
-      // Простий пароль для локальної панелі — в реалі треба бекенд
-      const pw = prompt('Введіть пароль старшого складу');
-      if(pw!== 'slothim-admin') return alert('Недостатньо прав');
-      document.getElementById('adminModal').classList.add('open');
-      document.getElementById('adminModal').setAttribute('aria-hidden','false');
-    });
-    document.getElementById('closeAdmin').addEventListener('click', closeAdmin);
-    document.getElementById('closeAdmin2').addEventListener('click', closeAdmin);
-    function closeAdmin(){ document.getElementById('adminModal').classList.remove('open'); document.getElementById('adminModal').setAttribute('aria-hidden','true'); }
-
-    // add news
-    document.getElementById('addNews').addEventListener('click', ()=>{
-      const t = document.getElementById('newsTitle').value.trim(); const c = document.getElementById('newsContent').value.trim(); if(!t||!c) return alert('Заповніть заголовок і текст'); addNews(t,c); document.getElementById('newsTitle').value=''; document.getElementById('newsContent').value='';
-    });
-
-    // load sample
-    document.getElementById('loadSample').addEventListener('click', ()=>{
-      DB.news.push({title:'Прийом нових членів відкрито', content:'Сьогодні відкрилися набори. Подайте заявку в анкеті.' , date:new Date().toISOString()});
-      DB.news.push({title:'Тренування у неділю', content:'О 20:00 буде заходи та тренування. Усі повинні бути готові.' , date:new Date().toISOString()});
-      DB.lastUpdate=new Date().toISOString(); writeDB(DB);
-    });
-
-    // accept/reject functions already defined (used in table)
-    window.acceptApp = acceptApp; window.rejectApp = rejectApp; window.promoteMember = promoteMember; window.deleteMember = deleteMember;
-
-    // promote request from UI (creates a request visible to admins as a news entry)
-    document.getElementById('requestPromote').addEventListener('click', ()=>{
-      const nick = document.getElementById('promoteNick').value.trim(); if(!nick) return alert('Введіть нік');
-      // create a small news item as request
-      DB.news.push({title:'Запит на підвищення: '+nick, content:'Користувач запросив розгляд на підвищення. Старший склад, проголосуйте.', date:new Date().toISOString()}); DB.lastUpdate=new Date().toISOString(); writeDB(DB);
-      document.getElementById('promoteResult').textContent = 'Запит відправлено.';
-      document.getElementById('promoteNick').value='';
-    });
-
-    // export data
-    document.getElementById('exportData').addEventListener('click', ()=>{
-      const blob = new Blob([JSON.stringify(DB, null, 2)],{type:'application/json'}); const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='slothim_data.json'; a.click(); URL.revokeObjectURL(url);
-    });
-
-    // theme toggle
-    document.getElementById('themeToggle').addEventListener('click', ()=>{
-      const root=document.documentElement; if(root.getAttribute('data-theme')==='dark') root.removeAttribute('data-theme'); else root.setAttribute('data-theme','dark');
-    });
-
-    // export/import helpers (if потрібно)
-
-    // initial render
-    updateUI();
-
-    // utility: keep DB variable in sync with storage in other tabs
-    window.addEventListener('storage', ()=>{ DB = readDB(); updateUI(); })
-
-    // small UX: update counts every minute
-    setInterval(()=>{ DB = readDB(); updateUI(); }, 60_000);
-
   </script>
 </body>
 </html>

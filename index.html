@@ -2,289 +2,152 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>SLOTHIM Clan</title>
+  <title>SLOTHIM — Клан</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap');
-
     body {
       margin: 0;
-      font-family: 'Rajdhani', sans-serif;
-      background: #111;
-      color: #ddd;
-      line-height: 1.6;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0d0d0d, #1f1f1f);
+      color: #e0e0e0;
     }
 
     header {
-      background: #1a1a1a;
-      padding: 30px;
+      background: #111;
+      padding: 20px;
       text-align: center;
-      border-bottom: 3px solid #444;
     }
 
     header h1 {
-      margin: 0;
-      font-size: 40px;
-      color: #e0e0e0;
-      letter-spacing: 2px;
+      font-size: 64px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 3px 3px 8px #0ff, -3px -3px 8px #08f;
+      letter-spacing: 5px;
+      font-family: "Trebuchet MS", sans-serif;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #222;
+      padding: 15px;
+      gap: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      padding: 12px 25px;
+      background: linear-gradient(145deg, #333, #111);
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    nav a:hover {
+      background: linear-gradient(145deg, #08f, #0ff);
+      color: black;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #0ff;
     }
 
     section {
-      padding: 60px 20px;
       max-width: 1000px;
-      margin: auto;
-      border-bottom: 1px solid #333;
+      margin: 40px auto;
+      padding: 30px;
+      background: #1a1a1a;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.7);
     }
 
-    h2 {
-      font-size: 28px;
-      color: #fff;
-      margin-bottom: 25px;
-      text-transform: uppercase;
-      border-left: 5px solid #555;
-      padding-left: 10px;
+    section h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #0ff;
+      text-shadow: 0 0 10px #08f;
     }
 
-    .about {
+    section p {
       font-size: 18px;
-      color: #ccc;
-      text-align: justify;
+      line-height: 1.6;
+      text-align: center;
     }
 
-    .team {
+    .button-box {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      gap: 25px;
+      justify-content: center;
+      margin-top: 20px;
     }
 
-    .member {
-      background: #1b1b1b;
-      border: 1px solid #333;
+    .big-button {
+      background: linear-gradient(145deg, #08f, #0ff);
+      color: black;
+      padding: 15px 40px;
       border-radius: 10px;
-      width: 220px;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .member img {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      margin-bottom: 10px;
-      border: 2px solid #555;
-    }
-
-    .member h3 {
-      margin: 10px 0 5px 0;
-      color: #fff;
       font-size: 20px;
-    }
-
-    .member p {
-      margin: 0;
-      color: #aaa;
-      font-size: 16px;
-    }
-
-    .rank-system {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .rank {
-      background: #1b1b1b;
-      border: 1px solid #333;
-      border-radius: 8px;
-      padding: 20px;
-      width: 200px;
-      text-align: center;
-    }
-
-    .rank h3 {
-      margin: 0 0 10px 0;
-      color: #fff;
-    }
-
-    .rank p {
-      color: #aaa;
-      font-size: 15px;
-    }
-
-    button {
-      background: #222;
-      border: 1px solid #555;
-      color: #fff;
-      padding: 12px 25px;
-      font-size: 16px;
-      border-radius: 6px;
+      font-weight: bold;
       cursor: pointer;
       transition: all 0.3s;
-      text-transform: uppercase;
+      border: none;
     }
 
-    button:hover {
-      background: #444;
-    }
-
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-    }
-
-    .modal-content {
-      background: #1a1a1a;
-      margin: 10% auto;
-      padding: 25px;
-      border: 1px solid #444;
-      width: 90%;
-      max-width: 500px;
-      border-radius: 8px;
-      color: #ddd;
-      position: relative;
-    }
-
-    .close {
-      color: #aaa;
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 22px;
-      cursor: pointer;
-    }
-
-    form input, form textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #444;
-      border-radius: 6px;
-      background: #111;
-      color: #ddd;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 15px;
-    }
-
-    form input:focus, form textarea:focus {
-      outline: none;
-      border-color: #666;
+    .big-button:hover {
+      background: linear-gradient(145deg, #0ff, #08f);
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #0ff;
     }
 
     footer {
-      padding: 20px;
       text-align: center;
-      font-size: 14px;
-      color: #666;
-      background: #1a1a1a;
-      border-top: 1px solid #333;
+      padding: 20px;
+      background: #111;
+      color: #aaa;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>SLOTHIM CLAN</h1>
+    <h1>SLOTHIM</h1>
   </header>
 
-  <section>
+  <nav>
+    <a href="#who">Хто ми?</a>
+    <a href="#about">Про нас</a>
+    <a href="#rank">Система підвищення</a>
+    <a href="#apply">Подати анкету</a>
+  </nav>
+
+  <section id="who">
+    <h2>Хто ми?</h2>
+    <p>Ми — серйозний клан SLOTHIM, який об'єднує сильних, розумних та відданих учасників. Тут кожен — частина команди.</p>
+  </section>
+
+  <section id="about">
     <h2>Про нас</h2>
-    <p class="about">
-      Клан <b>SLOTHIM</b> — це команда, яка об’єднує людей з різних ігор та платформ. 
-      Ми прагнемо дисципліни, порядку та взаємоповаги. 
-      Участь у нашій спільноті означає відповідальність та підтримку товаришів у будь-яких ситуаціях.
-    </p>
+    <p>Наш клан заснований для спільної гри, розвитку та досягнення високих результатів. Ми цінуємо дисципліну, активність і підтримку одне одного.</p>
   </section>
 
-  <section>
-    <h2>Старший склад</h2>
-    <div class="team">
-      <div class="member">
-        <img src="https://i.imgur.com/0y0y0y0.png" alt="Leader">
-        <h3>Leader</h3>
-        <p>Глава клану</p>
-      </div>
-      <div class="member">
-        <img src="https://i.imgur.com/0y0y0y0.png" alt="Officer">
-        <h3>Officer</h3>
-        <p>Куратор</p>
-      </div>
-      <div class="member">
-        <img src="https://i.imgur.com/0y0y0y0.png" alt="Strategist">
-        <h3>Strategist</h3>
-        <p>Тактик</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
+  <section id="rank">
     <h2>Система підвищення</h2>
-    <div class="rank-system">
-      <div class="rank">
-        <h3>Новачок</h3>
-        <p>Початковий рівень</p>
-      </div>
-      <div class="rank">
-        <h3>Боєць</h3>
-        <p>Активний учасник</p>
-      </div>
-      <div class="rank">
-        <h3>Офіцер</h3>
-        <p>Організатор груп</p>
-      </div>
-      <div class="rank">
-        <h3>Старший</h3>
-        <p>Ядро керівництва</p>
-      </div>
-    </div>
+    <p>У нашому клані є чітка система ранґів: <br><br>
+      🔹 Новобранець → Учасник → Офіцер → Старший офіцер → Лідер <br><br>
+      Підвищення відбувається за активність, внесок у клан і дисципліну.</p>
   </section>
 
-  <section>
-    <h2>Анкета на вступ</h2>
-    <button id="openModal">Заповнити анкету</button>
-  </section>
-
-  <!-- Modal -->
-  <div id="myModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Анкета</h2>
-      <form>
-        <input type="text" placeholder="Ваш нікнейм" required>
-        <input type="number" placeholder="Ваш вік" required>
-        <textarea placeholder="Чому ви хочете вступити?" required></textarea>
-        <button type="submit">Надіслати</button>
-      </form>
+  <section id="apply">
+    <h2>Подати анкету</h2>
+    <p>Хочеш стати частиною нашого клану? Натисни кнопку нижче:</p>
+    <div class="button-box">
+      <button class="big-button">Заповнити анкету</button>
     </div>
-  </div>
+  </section>
 
   <footer>
-    © 2025 SLOTHIM Clan. Всі права захищені.
+    © 2025 Клан SLOTHIM. Усі права захищено.
   </footer>
-
-  <script>
-    const modal = document.getElementById("myModal");
-    const btn = document.getElementById("openModal");
-    const span = document.getElementsByClassName("close")[0];
-
-    btn.onclick = function() {
-      modal.style.display = "block";
-    }
-
-    span.onclick = function() {
-      modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  </script>
 </body>
 </html>

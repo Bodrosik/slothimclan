@@ -4,115 +4,127 @@
   <meta charset="UTF-8">
   <title>SLOTHIM Clan</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap');
 
     body {
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(circle at top, #0a0a0f, #000000 90%);
-      color: #e0e0ff;
-      text-align: center;
+      font-family: 'Rajdhani', sans-serif;
+      background: #111;
+      color: #ddd;
+      line-height: 1.6;
     }
 
     header {
+      background: #1a1a1a;
       padding: 30px;
-      background: linear-gradient(90deg, #0ff, #f0f, #0ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 42px;
-      font-weight: bold;
-      text-shadow: 0 0 15px #0ff, 0 0 25px #f0f;
+      text-align: center;
+      border-bottom: 3px solid #444;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 40px;
+      color: #e0e0e0;
+      letter-spacing: 2px;
     }
 
     section {
       padding: 60px 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      max-width: 1000px;
+      margin: auto;
+      border-bottom: 1px solid #333;
     }
 
     h2 {
-      font-size: 32px;
-      color: #0ff;
-      text-shadow: 0 0 10px #0ff;
-      margin-bottom: 30px;
+      font-size: 28px;
+      color: #fff;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      border-left: 5px solid #555;
+      padding-left: 10px;
     }
 
     .about {
-      max-width: 800px;
-      margin: auto;
       font-size: 18px;
-      line-height: 1.6;
-      color: #bbb;
+      color: #ccc;
+      text-align: justify;
     }
 
     .team {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+      justify-content: flex-start;
+      gap: 25px;
     }
 
     .member {
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid #0ff;
-      border-radius: 15px;
-      width: 200px;
+      background: #1b1b1b;
+      border: 1px solid #333;
+      border-radius: 10px;
+      width: 220px;
       padding: 20px;
       text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .member:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #0ff;
     }
 
     .member img {
-      width: 100px;
-      height: 100px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
-      border: 3px solid #0ff;
       margin-bottom: 10px;
+      border: 2px solid #555;
+    }
+
+    .member h3 {
+      margin: 10px 0 5px 0;
+      color: #fff;
+      font-size: 20px;
+    }
+
+    .member p {
+      margin: 0;
+      color: #aaa;
+      font-size: 16px;
     }
 
     .rank-system {
       display: flex;
-      justify-content: center;
-      gap: 30px;
       flex-wrap: wrap;
+      gap: 20px;
     }
 
     .rank {
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid #f0f;
-      border-radius: 12px;
-      width: 180px;
+      background: #1b1b1b;
+      border: 1px solid #333;
+      border-radius: 8px;
       padding: 20px;
+      width: 200px;
       text-align: center;
-      transition: all 0.3s;
     }
 
-    .rank:hover {
-      box-shadow: 0 0 20px #f0f;
-      transform: translateY(-5px);
+    .rank h3 {
+      margin: 0 0 10px 0;
+      color: #fff;
+    }
+
+    .rank p {
+      color: #aaa;
+      font-size: 15px;
     }
 
     button {
-      background: none;
-      border: 2px solid #0ff;
-      color: #0ff;
-      padding: 15px 30px;
-      font-size: 18px;
-      border-radius: 10px;
+      background: #222;
+      border: 1px solid #555;
+      color: #fff;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 6px;
       cursor: pointer;
       transition: all 0.3s;
       text-transform: uppercase;
-      font-family: 'Orbitron', sans-serif;
     }
 
     button:hover {
-      background: #0ff;
-      color: #000;
-      box-shadow: 0 0 15px #0ff;
+      background: #444;
     }
 
     /* Modal */
@@ -125,29 +137,26 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(5px);
     }
 
     .modal-content {
-      background: #111;
+      background: #1a1a1a;
       margin: 10% auto;
-      padding: 20px;
-      border: 2px solid #0ff;
+      padding: 25px;
+      border: 1px solid #444;
       width: 90%;
       max-width: 500px;
-      border-radius: 12px;
-      text-align: left;
-      color: #eee;
-      box-shadow: 0 0 20px #0ff;
+      border-radius: 8px;
+      color: #ddd;
       position: relative;
     }
 
     .close {
-      color: #0ff;
+      color: #aaa;
       position: absolute;
       top: 10px;
-      right: 20px;
-      font-size: 24px;
+      right: 15px;
+      font-size: 22px;
       cursor: pointer;
     }
 
@@ -155,31 +164,41 @@
       width: 100%;
       padding: 10px;
       margin: 10px 0;
-      border: 2px solid #0ff;
-      border-radius: 8px;
-      background: #000;
-      color: #0ff;
-      font-family: 'Orbitron', sans-serif;
+      border: 1px solid #444;
+      border-radius: 6px;
+      background: #111;
+      color: #ddd;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 15px;
     }
 
     form input:focus, form textarea:focus {
       outline: none;
-      box-shadow: 0 0 10px #0ff;
+      border-color: #666;
     }
 
     footer {
       padding: 20px;
+      text-align: center;
       font-size: 14px;
       color: #666;
+      background: #1a1a1a;
+      border-top: 1px solid #333;
     }
   </style>
 </head>
 <body>
-  <header>SLOTHIM CLAN</header>
+  <header>
+    <h1>SLOTHIM CLAN</h1>
+  </header>
 
   <section>
     <h2>Про нас</h2>
-    <p class="about">Ми — клан SLOTHIM. Наша мета — бути найсильнішими у всіх іграх, куди ми приходимо. Ми цінуємо дружбу, підтримку та спільні перемоги. Кожен новий учасник стає частиною великої сім’ї!</p>
+    <p class="about">
+      Клан <b>SLOTHIM</b> — це команда, яка об’єднує людей з різних ігор та платформ. 
+      Ми прагнемо дисципліни, порядку та взаємоповаги. 
+      Участь у нашій спільноті означає відповідальність та підтримку товаришів у будь-яких ситуаціях.
+    </p>
   </section>
 
   <section>
@@ -193,7 +212,7 @@
       <div class="member">
         <img src="https://i.imgur.com/0y0y0y0.png" alt="Officer">
         <h3>Officer</h3>
-        <p>Офіцер</p>
+        <p>Куратор</p>
       </div>
       <div class="member">
         <img src="https://i.imgur.com/0y0y0y0.png" alt="Strategist">
@@ -208,19 +227,19 @@
     <div class="rank-system">
       <div class="rank">
         <h3>Новачок</h3>
-        <p>Перший рівень</p>
+        <p>Початковий рівень</p>
       </div>
       <div class="rank">
         <h3>Боєць</h3>
-        <p>Активний гравець</p>
+        <p>Активний учасник</p>
       </div>
       <div class="rank">
         <h3>Офіцер</h3>
-        <p>Помічник лідера</p>
+        <p>Організатор груп</p>
       </div>
       <div class="rank">
         <h3>Старший</h3>
-        <p>Ядро клану</p>
+        <p>Ядро керівництва</p>
       </div>
     </div>
   </section>
@@ -237,15 +256,15 @@
       <h2>Анкета</h2>
       <form>
         <input type="text" placeholder="Ваш нікнейм" required>
-        <input type="number" placeholder="Вік" required>
-        <textarea placeholder="Чому хочете вступити?" required></textarea>
+        <input type="number" placeholder="Ваш вік" required>
+        <textarea placeholder="Чому ви хочете вступити?" required></textarea>
         <button type="submit">Надіслати</button>
       </form>
     </div>
   </div>
 
   <footer>
-    © 2025 SLOTHIM Clan. Всі права захищено.
+    © 2025 SLOTHIM Clan. Всі права захищені.
   </footer>
 
   <script>

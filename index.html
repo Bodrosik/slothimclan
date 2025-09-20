@@ -1,294 +1,447 @@
 <!doctype html>
 <html lang="uk">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Геймовий, офісно-турнірний шаблон для клану — стильний та динамічний landing" />
-  <title>CLAN • Office Arena</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Russo+One&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SLOTHIM — Офіс клану</title>
+  <meta name="description" content="Офіційна сторінка клану SLOTHIM — новини, склад, система підвищення, анкета вступу">
   <style>
     :root{
-      --bg:#0b1020; --surface:#0f1724; --muted:#9aa4b2; --accent:#7ee3d1; --accent-2:#6ee7b7; --glass: rgba(255,255,255,0.04);
-      --radius:12px; --shadow: 0 10px 30px rgba(2,6,23,0.6);
-      --neon: drop-shadow(0 6px 18px rgba(110,231,183,0.12));
-      --max-width:1200px;
-      --glass-2: rgba(255,255,255,0.03);
+      --bg:#f7f9fc; --card:#ffffff; --muted:#6b7280; --accent:#2b6cb0; --accent-2:#7c3aed; --success:#16a34a; --danger:#e11d48; --glass: rgba(255,255,255,0.6);
     }
+    [data-theme="dark"]{ --bg:#0b1020; --card:#0f1724; --muted:#94a3b8; --accent:#4fd1c5; --accent-2:#60a5fa; --glass: rgba(255,255,255,0.03); }
+
     *{box-sizing:border-box}
-    html,body{height:100%;font-family:'Inter',system-ui,Arial;background:linear-gradient(180deg,#06070b,var(--bg));color:#e6f7f2;margin:0}
-    a{color:inherit}
-    .wrap{max-width:var(--max-width);margin:28px auto;padding:22px}
+    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:linear-gradient(180deg,var(--bg),#eef4fb);}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;background:var(--card);backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(12,18,28,0.08);position:sticky;top:0;z-index:50}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:22px}
+    nav{display:flex;gap:10px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600}
+    nav a:hover{background:var(--glass);color:var(--accent-2)}
+    .controls{display:flex;gap:10px;align-items:center}
+    .btn{padding:8px 12px;border-radius:8px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:700;cursor:pointer}
+    .ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--muted)}
 
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
-    .brand{display:flex;align-items:center;gap:14px}
-    .logo{width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,#0fffd3,#6ee7b7);display:grid;place-items:center;color:#052023;font-weight:900;font-family:'Russo One';font-size:20px;box-shadow:var(--shadow)}
-    .brand h1{margin:0;font-size:20px}
-    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    main{max-width:1200px;margin:28px auto;padding:0 18px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
 
-    nav{display:flex;gap:8px;align-items:center}
-    .nav-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:10px;font-weight:700;color:var(--muted);cursor:pointer;backdrop-filter: blur(6px)}
-    .nav-btn:hover{transform:translateY(-3px);transition:all .18s}
+    /* Left column */
+    .panel{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 6px 18px rgba(12,18,28,0.04)}
+    .hero{display:flex;gap:18px;align-items:center}
+    .hero .info{flex:1}
+    h1{margin:0;font-size:28px}
+    p.lead{margin:6px 0 0;color:var(--muted)}
 
-    /* hero */
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:22px;align-items:stretch}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:20px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03)}
-    .hero-left{padding:22px;display:flex;flex-direction:column;gap:12px}
-    .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(126,227,209,0.12), rgba(110,231,183,0.08));color:var(--accent);font-weight:800;font-size:12px}
-    h2{font-family:'Russo One',sans-serif;font-size:36px;margin:0;color:#dffcf0}
-    p.lead{margin:0;color:var(--muted);line-height:1.4}
+    .news-item{border-radius:10px;padding:12px;margin-bottom:12px;border-left:4px solid var(--accent-2);background:linear-gradient(180deg,transparent,rgba(0,0,0,0.01))}
+    .meta{font-size:12px;color:var(--muted)}
+    .avatar{width:44px;height:44px;border-radius:10px;display:inline-block;background:linear-gradient(135deg,#fff,rgba(255,255,255,0.06));align-items:center;justify-content:center;display:flex}
 
-    .controls{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-    .btn-cta{padding:12px 16px;border-radius:12px;border:0;background:linear-gradient(90deg,#18b38b,#2dd6b0);color:#042927;font-weight:900;cursor:pointer;box-shadow:0 8px 30px rgba(46,213,179,0.08)}
-    .btn-ghost{padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);font-weight:700}
+    /* Members list */
+    .members{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+    .member{background:var(--glass);padding:10px;border-radius:10px;text-align:center}
+    .member .name{font-weight:700}
+    .role{font-size:12px;color:var(--muted)}
 
-    .hero-right{display:flex;flex-direction:column;gap:12px}
-    .roster{display:flex;flex-direction:column;gap:8px}
-    .member{display:flex;align-items:center;gap:12px;padding:10px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));border:1px solid rgba(255,255,255,0.02)}
-    .avatar{width:60px;height:60px;border-radius:12px;background:linear-gradient(135deg,#0fffd3,#6ee7b7);display:grid;place-items:center;font-weight:800;color:#052023}
-    .meta strong{display:block}
-    .meta .role{font-size:12px;color:var(--muted)}
+    /* Right column */
+    .side-section{position:sticky;top:82px}
+    .card-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    .small{font-size:13px;color:var(--muted)}
 
-    /* mid sections */
-    section{margin-top:20px}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    /* Application form */
+    form.app{display:grid;gap:10px}
+    input[type=text],input[type=email],select,textarea{padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);outline:none;background:transparent}
+    textarea{min-height:110px}
 
-    .panel-title{display:flex;justify-content:space-between;align-items:center}
-    .pill{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);font-weight:800;color:var(--muted);font-size:12px}
+    /* Admin panel modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(3,6,18,0.5);z-index:200}
+    .modal.open{display:flex}
+    .modal .box{width:860px;max-width:95%;background:var(--card);padding:18px;border-radius:12px}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px;border-bottom:1px solid rgba(0,0,0,0.04);text-align:left}
 
-    .feature{padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border:1px solid rgba(255,255,255,0.02)}
+    /* badges */
+    .badge{display:inline-block;padding:6px 8px;border-radius:8px;font-size:12px;font-weight:700}
+    .badge.leader{background:linear-gradient(90deg,#fb7185,#f97316);color:#111}
+    .badge.officer{background:linear-gradient(90deg,#60a5fa,#7c3aed);color:white}
+    .badge.member{background:linear-gradient(90deg,#c7f9cc,#a7f3d0);color:#08211b}
 
-    .leaderboard{display:flex;flex-direction:column;gap:8px}
-    .lb-row{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:8px;background:rgba(255,255,255,0.015)}
+    footer{margin:28px 0;text-align:center;color:var(--muted)}
 
-    /* promotion system */
-    .ranks{display:flex;gap:10px;flex-wrap:wrap}
-    .rank{padding:10px;border-radius:10px;min-width:140px;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.02)}
-    .rank h4{margin:6px 0 0 0}
-    .progress{height:8px;background:rgba(255,255,255,0.03);border-radius:6px;margin-top:8px;overflow:hidden}
-    .progress > i{display:block;height:100%;background:linear-gradient(90deg,#18b38b,#2dd6b0)}
+    /* responsive */
+    @media (max-width:980px){.grid{grid-template-columns:1fr} .members{grid-template-columns:repeat(2,1fr)} .side-section{position:relative;top:auto}}
 
-    /* gallery */
-    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-    .gallery img{width:100%;height:84px;object-fit:cover;border-radius:8px}
-
-    footer{display:flex;justify-content:space-between;align-items:center;padding:14px 10px;margin-top:26px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent)}
-
-    @media(max-width:980px){
-      .hero{grid-template-columns:1fr}
-      .grid-3{grid-template-columns:1fr}
-      .gallery{grid-template-columns:repeat(2,1fr)}
-    }
-
-    /* neon animations */
-    .glow{filter:var(--neon);}
-    .pulse{animation:pulse 2.8s infinite}
-    @keyframes pulse{0%{transform:translateY(0);opacity:1}50%{transform:translateY(-6px);opacity:.95}100%{transform:translateY(0);opacity:1}}
-
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .row{display:flex;gap:10px;align-items:center}
+    .spacer{flex:1}
+    .pill{padding:6px 10px;border-radius:999px;border:1px solid rgba(0,0,0,0.04)}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo">ARENA</div>
-        <div>
-          <h1>CLAN • Office Arena</h1>
-          <p>Геймовий, але строгий — офісний порядок + арений драйв</p>
-        </div>
+  <header>
+    <div class="brand">
+      <div class="logo">S</div>
+      <div>
+        <div style="font-weight:800">SLOTHIM</div>
+        <div class="small muted">Офіс клану — внутрішній портал</div>
       </div>
-      <nav>
-        <button class="nav-btn" onclick="scrollToId('about')">Про</button>
-        <button class="nav-btn" onclick="scrollToId('roster')">Склад</button>
-        <button class="nav-btn" onclick="scrollToId('promotion')">Підвищення</button>
-        <button class="nav-btn" onclick="scrollToId('events')">Події</button>
-        <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Тема: ТЕМНА</button>
-      </nav>
-    </header>
+    </div>
+    <nav>
+      <a href="#news">Новини</a>
+      <a href="#staff">Старший склад</a>
+      <a href="#promotion">Підвищення</a>
+      <a href="#about">Про нас</a>
+      <a href="#apply">Анкета</a>
+    </nav>
+    <div class="controls">
+      <button class="ghost" id="themeToggle">Тема</button>
+      <button class="btn" id="openAdmin">Панель (старший склад)</button>
+    </div>
+  </header>
 
-    <main>
-      <section class="hero">
-        <div class="card hero-left">
-          <span class="kicker">ARCADE • Офісний режим</span>
-          <h2 class="glow">CLAN — Office Arena</h2>
-          <p class="lead">Ми поєднуємо організованість офісу та дух змагання. Тут — розклад рейдів, старші склади, система підвищення і ранги. Ніякої реєстрації — тільки кнопки та інформація для гравців.</p>
+  <main>
+    <section class="grid">
+      <div>
+        <section class="panel hero" id="news">
+          <div style="min-width:80px">
+            <div class="avatar">SI</div>
+          </div>
+          <div class="info">
+            <h1>Ласкаво просимо, SLOTHIM офіс</h1>
+            <p class="lead">Тут — офіційні новини, склад, процес підвищення та заявка на вступ. Працює через локальне сховище; старший склад може керувати через панель.</p>
+            <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+              <div class="pill">Активні: <strong id="activeCount">0</strong></div>
+              <div class="pill">Заявки: <strong id="appCount">0</strong></div>
+            </div>
+          </div>
+        </section>
 
-          <div class="controls">
-            <button class="btn-cta pulse" onclick="scrollToId('events')">Заплановані події</button>
-            <button class="btn-ghost" onclick="scrollToId('roster')">Оберегти склад</button>
-            <button class="btn-ghost" onclick="scrollToId('promotion')">Система підвищення</button>
-            <button class="btn-ghost" onclick="openRosterFilter()">Старший склад</button>
+        <section class="panel" style="margin-top:16px">
+          <h3 class="card-title">Останні новини <span class="small muted">(вручну або через панель)</span></h3>
+          <div id="newsList">
+            <!-- news items injected here -->
+          </div>
+          <div style="margin-top:8px;text-align:center">
+            <button class="ghost" id="loadSample">Завантажити приклади</button>
+          </div>
+        </section>
+
+        <section class="panel" id="staff" style="margin-top:16px">
+          <div class="card-title">
+            <h3>Старший склад</h3>
+            <div class="small muted">Керує кланом</div>
+          </div>
+          <div class="row" style="flex-wrap:wrap">
+            <div style="flex:1">
+              <div style="font-weight:800">Керівництво</div>
+              <div class="members" id="leadersList">
+                <!-- leaders -->
+              </div>
+            </div>
+            <div style="width:220px">
+              <div style="font-weight:800">Офіцери</div>
+              <div id="officersList" style="margin-top:8px">
+                <!-- officers -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="promotion" style="margin-top:16px">
+          <div class="card-title">
+            <h3>Система підвищення</h3>
+            <div class="small muted">Процес, критерії, запити</div>
+          </div>
+          <ol>
+            <li><strong>Кандидат:</strong> подає заявку на підвищення через профіль або старший склад ініціює.</li>
+            <li><strong>Оцінка:</strong> старший склад оцінює активність, дисципліну та внесок.</li>
+            <li><strong>Голосування:</strong> мінімум 2 голоси з керівництва потрібні для підвищення.</li>
+            <li><strong>Результат:</strong> роль оновлюється в системі та відправляється повідомлення.</li>
+          </ol>
+          <div style="margin-top:10px">
+            <label class="small muted">Запит на підвищення (введіть нік):</label>
+            <div style="display:flex;gap:8px;margin-top:6px">
+              <input type="text" id="promoteNick" placeholder="Нік гравця">
+              <button class="btn" id="requestPromote">Подати запит</button>
+            </div>
+            <div id="promoteResult" class="small muted" style="margin-top:6px"></div>
+          </div>
+        </section>
+
+        <section class="panel" id="about" style="margin-top:16px">
+          <h3>Про нас</h3>
+          <p class="muted">SLOTHIM — дружній клан, що поєднує офісну дисципліну та ігрову свободу. Ми проводимо регулярні події, тренінги та відкриті набори. Наша мета — рости якісно та підтримувати новачків.</p>
+
+          <h4 style="margin-top:12px">Наші правила (коротко)</h4>
+          <ul>
+            <li>Повага до інших членів;</li>
+            <li>Активність на тиждень — мінімум 3 дні (або повідомити про відсутність);</li>
+            <li>Виконувати накази старшого складу в межах правил клану;</li>
+            <li>Ніякої токсичної поведінки у загальних чатах.</li>
+          </ul>
+        </section>
+
+      </div>
+
+      <aside>
+        <div class="side-section">
+          <div class="panel">
+            <div class="card-title">
+              <h4>Швидка статистика</h4>
+              <div class="small muted">Локально збережено</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div class="row"><div>Членів:</div><div class="spacer"></div><div id="memberCount">0</div></div>
+              <div class="row"><div>Активні сьогодні:</div><div class="spacer"></div><div id="todayActive">0</div></div>
+              <div class="row"><div>Остання зміна:</div><div class="spacer"></div><div id="lastUpdate">—</div></div>
+            </div>
           </div>
 
-          <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap">
-            <div class="pill">Режим: <strong style="margin-left:6px;color:var(--accent)">Competitive</strong></div>
-            <div class="pill">Код доступу: <strong style="margin-left:6px;color:var(--accent)">ARENA-OP</strong></div>
+          <div class="panel" style="margin-top:12px">
+            <div class="card-title"><h4>Анкета на вступ</h4><div class="small muted">Подати заявку</div></div>
+            <form class="app" id="applyForm">
+              <input type="text" id="appNick" placeholder="Ігровий нік" required>
+              <input type="email" id="appEmail" placeholder="Email (контакт)" required>
+              <select id="appRole">
+                <option value="member">Звичайний член</option>
+                <option value="trial">Стажер</option>
+              </select>
+              <textarea id="appWhy" placeholder="Чому хочеш у клан? (коротко)" required></textarea>
+              <div style="display:flex;gap:8px">
+                <button class="btn" type="submit">Надіслати заявку</button>
+                <button class="ghost" type="button" id="clearApps">Очистити заявки (адмін)</button>
+              </div>
+            </form>
+            <div style="margin-top:10px"><small class="muted">Всі заявки зберігаються в браузері. Старший склад може переглядати їх у панелі.</small></div>
+          </div>
+
+          <div class="panel" style="margin-top:12px">
+            <div class="card-title"><h4>Контакти</h4><div class="small muted">Звертайтесь до керівництва</div></div>
+            <div class="small muted">Головний: SlothLeader#0001<br>Пошта: slothim@example.com</div>
+            <div style="margin-top:10px">
+              <button class="btn" id="exportData">Експорт даних</button>
+            </div>
           </div>
         </div>
-
-        <aside class="card hero-right">
-          <div class="panel-title"><h3 style="margin:0">Керівний склад</h3><div class="pill">Лідери</div></div>
-          <div class="roster" id="roster" style="margin-top:8px">
-            <div class="member"><div class="avatar">AK</div><div class="meta"><strong>Андрій "AK"</strong><div class="role">Капітан • Тактичний</div></div></div>
-            <div class="member"><div class="avatar">SV</div><div class="meta"><strong>Світлана "SV"</strong><div class="role">Операційний менеджер</div></div></div>
-            <div class="member"><div class="avatar">DM</div><div class="meta"><strong>Дмитро "DM"</strong><div class="role">Тех. інженер</div></div></div>
-            <div class="member"><div class="avatar">LT</div><div class="meta"><strong>Леся "LT"</strong><div class="role">Тренер</div></div></div>
-          </div>
-
-          <div style="margin-top:12px;display:flex;gap:8px;justify-content:space-between;align-items:center">
-            <div class="small-muted">Наступний івент</div>
-            <div style="text-align:right"><strong>05 жовтня</strong><div class="small-muted">21:30 (Kyiv)</div></div>
-          </div>
-        </aside>
-      </section>
-
-      <section id="about" class="card" style="margin-top:18px">
-        <h3>Про клан</h3>
-        <div class="grid-2" style="margin-top:12px">
-          <div>
-            <p class="muted">Office Arena — це структура з чіткою ієрархією: старший склад, основний склад та резерв. Ми розробили прозору систему підвищення та внутрішніх політик, щоби кожен знав свої обов'язки.</p>
-            <ul style="margin-top:10px;color:var(--muted)">
-              <li>Офісні процедури + ігрові тренування</li>
-              <li>Система оцінки та підвищень</li>
-              <li>Регулярні аналітичні сесії</li>
-            </ul>
-          </div>
-          <div>
-            <p class="muted">Комунікація: Discord (канали для тренувань, тактик і операцій), Telegram-канал для швидких оголошень, внутрішній репозиторій гайдів.</p>
-            <div style="margin-top:8px"><strong>Фокус</strong><div class="small-muted">Професіоналізм, дисципліна, адаптивні стратегії</div></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="events" class="card" style="margin-top:18px">
-        <div class="panel-title"><h3 style="margin:0">Події та розклад</h3><div class="pill">Графік</div></div>
-        <div style="margin-top:12px">
-          <div class="feature"><strong>Тренувальний день</strong><div class="small-muted">Щовівторка • 19:00 — Розбір тактик</div></div>
-          <div class="feature" style="margin-top:8px"><strong>Каст стрім</strong><div class="small-muted">Раз на місяць — аналіз матчів та Q&amp;A</div></div>
-          <div class="feature" style="margin-top:8px"><strong>Відбір до старшого складу</strong><div class="small-muted">Періодичні відбори — слідкуйте за оголошеннями</div></div>
-        </div>
-      </section>
-
-      <section id="promotion" class="card" style="margin-top:18px">
-        <div class="panel-title"><h3 style="margin:0">Система підвищення</h3><div class="pill">Прозоро</div></div>
-        <p class="muted" style="margin-top:8px">Підвищення відбуваються за комбінацією: участь у заходах, оцінка тренерів, внутрішні KPI та аналітика ігор. Нижче — демонстраційна логіка підвищення (клікаєш — оновлюється прогрес).</p>
-
-        <div style="margin-top:12px" class="ranks">
-          <div class="rank" id="rank-rookie"><strong>Rookie</strong><h4>Новачок</h4><div class="progress"><i style="width:30%" id="p-rookie"></i></div><div style="margin-top:8px"><button class="nav-btn" onclick="gain('rookie')">Додати досвід</button></div></div>
-          <div class="rank" id="rank-regular"><strong>Regular</strong><h4>Основний</h4><div class="progress"><i style="width:10%" id="p-regular"></i></div><div style="margin-top:8px"><button class="nav-btn" onclick="gain('regular')">Додати досвід</button></div></div>
-          <div class="rank" id="rank-senior"><strong>Senior</strong><h4>Старший</h4><div class="progress"><i style="width:5%" id="p-senior"></i></div><div style="margin-top:8px"><button class="nav-btn" onclick="gain('senior')">Додати досвід</button></div></div>
-        </div>
-
-        <div style="margin-top:12px;color:var(--muted);font-size:13px">Примітка: це демонстрація — для реальної системи збережіть дані на сервері або в базі даних.</div>
-      </section>
-
-      <section class="grid-3" style="margin-top:18px">
-        <div class="card">
-          <h4>Галерея</h4>
-          <div class="gallery" style="margin-top:8px">
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=aaa" alt="gallery1">
-            <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=bbb" alt="gallery2">
-            <img src="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=ccc" alt="gallery3">
-            <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=ddd" alt="gallery4">
-          </div>
-        </div>
-        <div class="card">
-          <h4>Лідерборд</h4>
-          <div class="leaderboard" style="margin-top:8px">
-            <div class="lb-row"><div><strong>#1</strong> АK</div><div class="small-muted">2500 pts</div></div>
-            <div class="lb-row"><div><strong>#2</strong> SV</div><div class="small-muted">2130 pts</div></div>
-            <div class="lb-row"><div><strong>#3</strong> DM</div><div class="small-muted">1875 pts</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <h4>Швидкий доступ</h4>
-          <div style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
-            <button class="btn-ghost" onclick="openRosterFilter()">Старший склад</button>
-            <button class="btn-ghost" onclick="alert('Тут відкриється документ з гайдами (майбутня інтеграція)')">Документація</button>
-            <button class="btn-ghost" onclick="alert('Тут — посилання на Discord')">Discord</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="card" style="margin-top:18px">
-        <h4>Контакти</h4>
-        <div class="grid-2" style="margin-top:10px">
-          <div>
-            <p class="muted">Discord: <strong>ARENA#0001</strong></p>
-            <p class="muted">Telegram: <strong>@arena_clan</strong></p>
-          </div>
-          <div>
-            <p class="muted">GitHub: <strong>github.com/your-clan</strong></p>
-            <p class="muted">Код клану: <strong>ARENA-OP</strong></p>
-          </div>
-        </div>
-      </section>
-
-    </main>
+      </aside>
+    </section>
 
     <footer>
-      <div class="small-muted">© CLAN • Office Arena — 2025</div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <div class="small-muted">Theme</div>
-        <div style="display:flex;gap:8px">
-          <button class="nav-btn" onclick="setTheme('dark')">Dark</button>
-          <button class="nav-btn" onclick="setTheme('light')">Light</button>
+      © SLOTHIM — Внутрішній портал. Зберігає дані у вашому браузері. Якщо потрібно синхронізувати — можна підключити сервер API.
+    </footer>
+  </main>
+
+  <!-- Admin modal -->
+  <div class="modal" id="adminModal" aria-hidden="true">
+    <div class="box">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3>Панель старшого складу</h3>
+        <div class="row"><button class="ghost" id="closeAdmin">Закрити</button></div>
+      </div>
+      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <h4>Керування новинами</h4>
+          <div style="display:flex;gap:8px;margin-bottom:8px"><input id="newsTitle" placeholder="Заголовок"><button class="btn" id="addNews">Додати</button></div>
+          <textarea id="newsContent" placeholder="Текст новини"></textarea>
+          <div style="margin-top:8px"><small class="muted">Новини будуть збережені у localStorage.</small></div>
+        </div>
+        <div>
+          <h4>Управління членами</h4>
+          <table>
+            <thead><tr><th>Нік</th><th>Роль</th><th>Дії</th></tr></thead>
+            <tbody id="membersTable"></tbody>
+          </table>
         </div>
       </div>
-    </footer>
+
+      <hr style="margin:12px 0">
+      <h4>Заявки</h4>
+      <table>
+        <thead><tr><th>Нік</th><th>Email</th><th>Роль</th><th>Чому</th><th>Дії</th></tr></thead>
+        <tbody id="appsTable"></tbody>
+      </table>
+      <div style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px">
+        <button class="ghost" id="closeAdmin2">Закрити</button>
+      </div>
+    </div>
   </div>
 
   <script>
-    // smooth scroll
-    function scrollToId(id){
-      const el = document.getElementById(id);
-      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    // Простий локальний менеджер даних (localStorage). Ця система підходить для демо/оффлайн внутрішнього порталу.
+    const DB_KEY = 'slothim_portal_v1';
+    const defaultData = {
+      members: [
+        {nick:'SlothLeader',role:'leader',joined: '2024-11-01'},
+        {nick:'Moss',role:'officer',joined: '2025-02-10'},
+        {nick:'Lazy',role:'member',joined: '2025-03-05'},
+      ],
+      news: [],
+      apps: [] ,
+      lastUpdate: new Date().toISOString()
+    };
+
+    function readDB(){
+      try{const raw = localStorage.getItem(DB_KEY); if(!raw) return structuredClone(defaultData); return JSON.parse(raw);}catch(e){console.error(e); return structuredClone(defaultData)}
+    }
+    function writeDB(data){ localStorage.setItem(DB_KEY, JSON.stringify(data)); updateUI(); }
+
+    // init
+    let DB = readDB();
+
+    // UI helpers
+    function el(tag,attrs={},txt=''){const e=document.createElement(tag);for(const k in attrs) e.setAttribute(k,attrs[k]); if(txt) e.textContent=txt; return e}
+
+    // render news
+    function renderNews(){
+      const list = document.getElementById('newsList'); list.innerHTML='';
+      if(!DB.news.length){ list.innerHTML='<div class="muted">Новин ще не додано. Натисніть "Завантажити приклади" або додайте в панелі.</div>'; return }
+      DB.news.slice().reverse().forEach(n=>{
+        const node = document.createElement('div'); node.className='news-item';
+        node.innerHTML = `<div style=\"display:flex;justify-content:space-between\"><div><strong>${escapeHTML(n.title)}</strong></div><div class=\"meta\">${new Date(n.date).toLocaleString()}</div></div><div style=\"margin-top:8px\">${escapeHTML(n.content)}</div>`;
+        list.appendChild(node);
+      })
     }
 
-    // roster filter (старший склад)
-    function openRosterFilter(){
-      alert('Старший склад:
-- AK (Капітан)
-- SV (Операції)
-- LT (Тренер)');
+    function escapeHTML(s){ if(!s) return ''; return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('\"','&quot;') }
+
+    // render members
+    function renderMembers(){
+      document.getElementById('membersTable').innerHTML='';
+      const leadersEl = document.getElementById('leadersList'); leadersEl.innerHTML='';
+      const officersEl = document.getElementById('officersList'); officersEl.innerHTML='';
+
+      DB.members.forEach(m=>{
+        const tr = document.createElement('tr');
+        const td1=document.createElement('td'); td1.textContent = m.nick; const td2=document.createElement('td'); td2.textContent = m.role; const td3=document.createElement('td');
+        const btnProm = document.createElement('button'); btnProm.className='ghost'; btnProm.textContent='Підвищити'; btnProm.onclick=()=>promoteMember(m.nick);
+        const btnDel = document.createElement('button'); btnDel.className='ghost'; btnDel.textContent='Видалити'; btnDel.onclick=()=>deleteMember(m.nick);
+        td3.appendChild(btnProm); td3.appendChild(document.createTextNode(' ')); td3.appendChild(btnDel);
+        tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3);
+        document.getElementById('membersTable').appendChild(tr);
+
+        // side lists
+        const card = document.createElement('div'); card.className='member';
+        const name = document.createElement('div'); name.className='name'; name.textContent=m.nick;
+        const role = document.createElement('div'); role.className='role'; role.textContent=m.role;
+        card.appendChild(name); card.appendChild(role);
+
+        if(m.role==='leader') leadersEl.appendChild(card);
+        else if(m.role==='officer') officersEl.appendChild(card);
+      });
+
+      document.getElementById('memberCount').textContent = DB.members.length;
     }
 
-    // simple demo promotion logic
-    const state = {rookie:30, regular:10, senior:5};
-    function gain(rank){
-      if(rank === 'rookie') state.rookie = Math.min(100, state.rookie + 15);
-      if(rank === 'regular') state.regular = Math.min(100, state.regular + 12);
-      if(rank === 'senior') state.senior = Math.min(100, state.senior + 8);
-      document.getElementById('p-rookie').style.width = state.rookie + '%';
-      document.getElementById('p-regular').style.width = state.regular + '%';
-      document.getElementById('p-senior').style.width = state.senior + '%';
-      if(state.rookie >= 100) alert('Гравець підвищений до Regular! (демо)');
-      if(state.regular >= 100) alert('Гравець підвищений до Senior! (демо)');
+    // render apps
+    function renderApps(){
+      const t = document.getElementById('appsTable'); t.innerHTML='';
+      DB.apps.forEach((a,idx)=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML = `<td>${escapeHTML(a.nick)}</td><td>${escapeHTML(a.email)}</td><td>${escapeHTML(a.role)}</td><td>${escapeHTML(a.why)}</td>`;
+        const td = document.createElement('td');
+        const acc = document.createElement('button'); acc.className='btn'; acc.textContent='Прийняти'; acc.onclick=()=>acceptApp(idx);
+        const rej = document.createElement('button'); rej.className='ghost'; rej.textContent='Відхилити'; rej.onclick=()=>rejectApp(idx);
+        td.appendChild(acc); td.appendChild(document.createTextNode(' ')); td.appendChild(rej);
+        tr.appendChild(td);
+        t.appendChild(tr);
+      });
+      document.getElementById('appCount').textContent = DB.apps.length;
     }
 
-    // theme switcher
-    function toggleTheme(){
-      const el = document.getElementById('themeToggle');
-      if(el.textContent.includes('ТЕМНА')){ setTheme('light'); el.textContent='Тема: СВІТЛА'; }
-      else { setTheme('dark'); el.textContent='Тема: ТЕМНА'; }
-    }
-    function setTheme(mode){
-      const r = document.documentElement.style;
-      if(mode === 'light'){
-        r.setProperty('--bg','#f5f7fb'); r.setProperty('--surface','#ffffff'); r.setProperty('--muted','#334155'); document.body.style.background='linear-gradient(180deg,#e9f5f2,#f5f7fb)';
-      } else {
-        r.setProperty('--bg','#0b1020'); r.setProperty('--surface','#0f1724'); r.setProperty('--muted','#9aa4b2'); document.body.style.background='linear-gradient(180deg,#06070b,var(--bg))';
-      }
+    function updateUI(){
+      renderNews(); renderMembers(); renderApps();
+      document.getElementById('activeCount').textContent = DB.members.filter(m=>m.role!=='trial').length;
+      document.getElementById('todayActive').textContent = Math.max(0, Math.floor(DB.members.length/2));
+      document.getElementById('lastUpdate').textContent = new Date(DB.lastUpdate).toLocaleString();
+      document.getElementById('appCount').textContent = DB.apps.length;
     }
 
-    // init demo values
-    document.addEventListener('DOMContentLoaded', ()=>{
-      document.getElementById('p-rookie').style.width = state.rookie + '%';
-      document.getElementById('p-regular').style.width = state.regular + '%';
-      document.getElementById('p-senior').style.width = state.senior + '%';
+    // actions
+    function addNews(title,content){ DB.news.push({title,content,date:new Date().toISOString()}); DB.lastUpdate = new Date().toISOString(); writeDB(DB); }
+    function promoteMember(nick){
+      const i = DB.members.findIndex(m=>m.nick===nick);
+      if(i===-1) return alert('Не знайдено');
+      const order = ['member','trial','officer','leader'];
+      const cur = DB.members[i].role; const idx = order.indexOf(cur); const next = order[Math.min(order.length-1,idx+1)];
+      DB.members[i].role = next; DB.lastUpdate=new Date().toISOString(); writeDB(DB);
+      alert(`${nick} -> ${next}`);
+    }
+    function deleteMember(nick){ if(!confirm('Видалити '+nick+'?')) return; DB.members = DB.members.filter(m=>m.nick!==nick); DB.lastUpdate=new Date().toISOString(); writeDB(DB); }
+
+    function acceptApp(idx){ const a = DB.apps[idx]; DB.members.push({nick:a.nick,role:a.role,joined:new Date().toISOString()}); DB.apps.splice(idx,1); DB.lastUpdate=new Date().toISOString(); writeDB(DB); }
+    function rejectApp(idx){ if(!confirm('Відхилити заявку?')) return; DB.apps.splice(idx,1); DB.lastUpdate=new Date().toISOString(); writeDB(DB); }
+
+    // application submit
+    document.getElementById('applyForm').addEventListener('submit', e=>{
+      e.preventDefault(); const nick=document.getElementById('appNick').value.trim(); const email=document.getElementById('appEmail').value.trim(); const role=document.getElementById('appRole').value; const why=document.getElementById('appWhy').value.trim();
+      if(!nick||!email||!why) return alert('Заповніть усі поля');
+      DB.apps.push({nick,email,role,why,date:new Date().toISOString()}); DB.lastUpdate=new Date().toISOString(); writeDB(DB);
+      alert('Заявку відправлено — старший склад побачить її у панелі.');
+      document.getElementById('applyForm').reset();
     });
+
+    document.getElementById('clearApps').addEventListener('click', ()=>{
+      if(!confirm('Очистити всі заявки? (тільки в локальному сховищі)')) return; DB.apps=[]; DB.lastUpdate=new Date().toISOString(); writeDB(DB);
+    })
+
+    // admin panel open
+    document.getElementById('openAdmin').addEventListener('click', ()=>{
+      // Простий пароль для локальної панелі — в реалі треба бекенд
+      const pw = prompt('Введіть пароль старшого складу');
+      if(pw!== 'slothim-admin') return alert('Недостатньо прав');
+      document.getElementById('adminModal').classList.add('open');
+      document.getElementById('adminModal').setAttribute('aria-hidden','false');
+    });
+    document.getElementById('closeAdmin').addEventListener('click', closeAdmin);
+    document.getElementById('closeAdmin2').addEventListener('click', closeAdmin);
+    function closeAdmin(){ document.getElementById('adminModal').classList.remove('open'); document.getElementById('adminModal').setAttribute('aria-hidden','true'); }
+
+    // add news
+    document.getElementById('addNews').addEventListener('click', ()=>{
+      const t = document.getElementById('newsTitle').value.trim(); const c = document.getElementById('newsContent').value.trim(); if(!t||!c) return alert('Заповніть заголовок і текст'); addNews(t,c); document.getElementById('newsTitle').value=''; document.getElementById('newsContent').value='';
+    });
+
+    // load sample
+    document.getElementById('loadSample').addEventListener('click', ()=>{
+      DB.news.push({title:'Прийом нових членів відкрито', content:'Сьогодні відкрилися набори. Подайте заявку в анкеті.' , date:new Date().toISOString()});
+      DB.news.push({title:'Тренування у неділю', content:'О 20:00 буде заходи та тренування. Усі повинні бути готові.' , date:new Date().toISOString()});
+      DB.lastUpdate=new Date().toISOString(); writeDB(DB);
+    });
+
+    // accept/reject functions already defined (used in table)
+    window.acceptApp = acceptApp; window.rejectApp = rejectApp; window.promoteMember = promoteMember; window.deleteMember = deleteMember;
+
+    // promote request from UI (creates a request visible to admins as a news entry)
+    document.getElementById('requestPromote').addEventListener('click', ()=>{
+      const nick = document.getElementById('promoteNick').value.trim(); if(!nick) return alert('Введіть нік');
+      // create a small news item as request
+      DB.news.push({title:'Запит на підвищення: '+nick, content:'Користувач запросив розгляд на підвищення. Старший склад, проголосуйте.', date:new Date().toISOString()}); DB.lastUpdate=new Date().toISOString(); writeDB(DB);
+      document.getElementById('promoteResult').textContent = 'Запит відправлено.';
+      document.getElementById('promoteNick').value='';
+    });
+
+    // export data
+    document.getElementById('exportData').addEventListener('click', ()=>{
+      const blob = new Blob([JSON.stringify(DB, null, 2)],{type:'application/json'}); const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='slothim_data.json'; a.click(); URL.revokeObjectURL(url);
+    });
+
+    // theme toggle
+    document.getElementById('themeToggle').addEventListener('click', ()=>{
+      const root=document.documentElement; if(root.getAttribute('data-theme')==='dark') root.removeAttribute('data-theme'); else root.setAttribute('data-theme','dark');
+    });
+
+    // export/import helpers (if потрібно)
+
+    // initial render
+    updateUI();
+
+    // utility: keep DB variable in sync with storage in other tabs
+    window.addEventListener('storage', ()=>{ DB = readDB(); updateUI(); })
+
+    // small UX: update counts every minute
+    setInterval(()=>{ DB = readDB(); updateUI(); }, 60_000);
+
   </script>
 </body>
 </html>
